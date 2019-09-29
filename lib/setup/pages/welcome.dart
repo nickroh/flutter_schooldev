@@ -1,6 +1,8 @@
 import 'package:flutter_schooldev/setup/pages/sign_in.dart';
 import 'package:flutter_schooldev/setup/pages/sign_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -12,22 +14,39 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My firebase app'),
+        title: Text('School Dev'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          RaisedButton(
-            onPressed: navigateToSignIn,
-            child: Text('Sign in'),
-          ),
-          RaisedButton(
-            onPressed: navigateToSignUp,
-            child: Text('Sign up'),
-          ),
-        ],
-      ),
+      backgroundColor: Color.fromARGB(0xFF, 0xF0, 0xF0, 0xF0),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 25.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  GoogleSignInButton(onPressed: () {}),
+                  FacebookSignInButton(onPressed: () {}),
+                  RaisedButton(
+                    onPressed: navigateToSignIn,
+                    child: Text('Sign In With Email'),
+                    color: Color.fromARGB(0xFF, 0xF0, 0xF0, 0xF0),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 25.0,),
+            RaisedButton(
+              onPressed: navigateToSignUp,
+              child: Text('Sign Up'),
+              color: Color.fromARGB(0xFF, 0xF0, 0xF0, 0xF0),
+            )
+          ],
+        ),
+      )
+
     );
   }
 
