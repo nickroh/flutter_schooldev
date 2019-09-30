@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_schooldev/services/authentication.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginSignUpPage extends StatefulWidget {
   LoginSignUpPage({this.auth, this.onSignedIn});
@@ -52,6 +53,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
           widget.auth.sendEmailVerification();
           _showVerifyEmailSentDialog();
           print('Signed up user: $userId');
+          print('test');
         }
         setState(() {
           _isLoading = false;
@@ -62,7 +64,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         }
 
       } catch (e) {
-        print('Error: $e');
+        print('Error: $e ');
         setState(() {
           _isLoading = false;
           if (_isIos) {
@@ -103,7 +105,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     _isIos = Theme.of(context).platform == TargetPlatform.iOS;
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('Flutter login demo'),
+          title: new Text('SchoolDev Login'),
         ),
         body: Stack(
           children: <Widget>[
