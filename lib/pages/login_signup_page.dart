@@ -104,9 +104,9 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   Widget build(BuildContext context) {
     _isIos = Theme.of(context).platform == TargetPlatform.iOS;
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('SchoolDev Login'),
-        ),
+//        appBar: new AppBar(
+//          title: new Text('SchoolDev Login'),
+//        ),
         body: Stack(
           children: <Widget>[
             _showBody(),
@@ -188,7 +188,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
           radius: 48.0,
-          child: Image.asset('assets/flutter-icon.png'),
+          child: Image.asset('assets/Logo.png'),
         ),
       ),
     );

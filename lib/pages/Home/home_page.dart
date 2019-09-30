@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_schooldev/services/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'dart:math';
+import 'package:flutter_schooldev/pages/Home/slideshow.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -12,6 +12,8 @@ class HomePage extends StatefulWidget {
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   final String userId;
+
+  final PageController ctrl = PageController();
 
   @override
   State<StatefulWidget> createState() => new _HomePageState();
@@ -117,18 +119,17 @@ class _HomePageState extends State<HomePage> {
               onPressed: _signOut)
         ],
       ),
-      body: Stack(
-        children: <Widget>[
-         Center(
-          child: Image.asset(
-            'assets/image-2.png',
-            width: size.width,
-            height: size.height,
-            fit: BoxFit.fill,
-           ),
-          ),
-         ],
-       ),
+      body: Slideshow(),
+
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: Text('Profile'),
+        icon: Icon(Icons.person),
+        backgroundColor: Colors.lightGreen,
+      ),
+
     );
   }
 }
