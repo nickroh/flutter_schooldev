@@ -121,7 +121,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
          Center(
           child: Image.asset(
-            'assets/flutter-icon.png',
+            'assets/image-2.png',
             width: size.width,
             height: size.height,
             fit: BoxFit.fill,
