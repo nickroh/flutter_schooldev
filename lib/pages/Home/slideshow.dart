@@ -4,6 +4,8 @@ import 'dart:async';
 
 class Slideshow extends StatefulWidget {
   @override
+  final bool selected;
+  Slideshow({this.selected});
   _SlideshowState createState() => _SlideshowState();
 }
 
@@ -75,6 +77,7 @@ class _SlideshowState extends State<Slideshow> {
     );
   }
 
+
   AnimatedContainer _buildStoryPage(Map data, bool active) {
     // Animated properties
     final double blur = active ? 30 : 0;
@@ -82,9 +85,11 @@ class _SlideshowState extends State<Slideshow> {
     final double top = active ? 100 : 200;
 
     return AnimatedContainer(
+
       duration: Duration(milliseconds: 500),
       curve: Curves.easeOutQuint,
       margin: EdgeInsets.only(top: top, bottom: 50, right: 30),
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         image: DecorationImage(
@@ -108,9 +113,18 @@ class _SlideshowState extends State<Slideshow> {
     );
   }
 
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+
+    return GestureDetector(
+        onTap: () {
+          selected = true;
+          setState(() {
+            selected = true;
+          });
+      },
+     child: StreamBuilder(
       stream: slides,
       initialData: [],
       builder: (context, AsyncSnapshot snap) {
@@ -123,11 +137,39 @@ class _SlideshowState extends State<Slideshow> {
               return _buildTagPage();
             } else if (slideList.length >= currentIndex) {
               bool active = currentIndex == currentPage;
+              if(currentPage > 0){
+                Map data = slideList[currentPage - 1];
+                print(selected);
+                if(selected == true){
+                  print(data['title']);
+                  selected = false;
+                }
+              }
               return _buildStoryPage(slideList[currentIndex - 1], active);
             }
           },
         );
       },
+    ),
     );
+//    return StreamBuilder(
+//      stream: slides,
+//      initialData: [],
+//      builder: (context, AsyncSnapshot snap) {
+//        List slideList = snap.data.toList();
+//        return PageView.builder(
+//          controller: controller,
+//          itemCount: slideList.length + 1,
+//          itemBuilder: (context, int currentIndex) {
+//            if (currentIndex == 0) {
+//              return _buildTagPage();
+//            } else if (slideList.length >= currentIndex) {
+//              bool active = currentIndex == currentPage;
+//              return _buildStoryPage(slideList[currentIndex - 1], active);
+//            }
+//          },
+//        );
+//      },
+//    );
   }
 }
