@@ -53,7 +53,7 @@ class _SlideshowState extends State<Slideshow> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Your Stories',
+            'Your Pins',
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           Text('FILTER', style: TextStyle(color: Colors.black26)),
