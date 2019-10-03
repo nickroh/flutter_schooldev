@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+import 'package:flutter_schooldev/pages/Post/select.dart';
 
 class Slideshow extends StatefulWidget {
   @override
@@ -120,6 +121,10 @@ class _SlideshowState extends State<Slideshow> {
     return GestureDetector(
         onTap: () {
           selected = true;
+          if(currentPage > 0){
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => select()));
+          }
+
           setState(() {
             selected = true;
           });
