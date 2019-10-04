@@ -35,15 +35,32 @@ class ShowSlidesState extends State<ShowSlides> {
 
   Function goToTab;
 
+  static var now = new DateTime.now();
+  static var date = now.day;
+  static String day = date.toString();
+
+
+  Future getMeal() async {
+    var firestore = Firestore.instance;
+
+    QuerySnapshot qn = await firestore.collection('meal').getDocuments();
+
+    return qn.documents;
+  }
+
+  Future _data;
+
   @override
   void initState() {
     super.initState();
 
+    _data = getMeal();
+
     slides.add(
       new Slide(
-        title: "SCHOOL",
+        title: "Morning",
         styleTitle: TextStyle(
-            color: Color(0xff3da4ab),
+            color: Colors.lightGreen,
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'RobotoMono'),
@@ -59,7 +76,7 @@ class ShowSlidesState extends State<ShowSlides> {
     );
     slides.add(
       new Slide(
-        title: "MUSEUM",
+        title: "Lunch",
         styleTitle: TextStyle(
             color: Color(0xff3da4ab),
             fontSize: 30.0,
@@ -77,7 +94,7 @@ class ShowSlidesState extends State<ShowSlides> {
     );
     slides.add(
       new Slide(
-        title: "COFFEE SHOP",
+        title: "Dinner",
         styleTitle: TextStyle(
             color: Color(0xff3da4ab),
             fontSize: 30.0,
@@ -176,20 +193,6 @@ class ShowSlidesState extends State<ShowSlides> {
       // List slides
       slides: this.slides,
 
-      // Skip button
-      renderSkipBtn: this.renderSkipBtn(),
-      colorSkipBtn: Color(0x33ffcc5c),
-      highlightColorSkipBtn: Color(0xffffcc5c),
-
-      // Next button
-      renderNextBtn: this.renderNextBtn(),
-
-      // Done button
-      renderDoneBtn: this.renderDoneBtn(),
-      onDonePress: this.onDonePress,
-      colorDoneBtn: Color(0x33ffcc5c),
-      highlightColorDoneBtn: Color(0xffffcc5c),
-
       // Dot indicator
       colorDot: Color(0xffffcc5c),
       sizeDot: 13.0,
@@ -207,6 +210,15 @@ class ShowSlidesState extends State<ShowSlides> {
 
       // On tab change completed
       onTabChangeCompleted: this.onTabChangeCompleted,
+    );
+  }
+
+  Widget _buildWaitingScreen() {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

@@ -42,6 +42,7 @@ class _ListPageState extends State<ListPage>{
 
   Future _data;
 
+
   Future getPost() async {
     var firestore = Firestore.instance;
 
