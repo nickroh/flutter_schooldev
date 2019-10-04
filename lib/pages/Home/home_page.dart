@@ -4,6 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter_schooldev/pages/Home/slideshow.dart';
 import 'package:flutter_schooldev/pages/Post/testpage.dart';
+import 'package:flutter_schooldev/pages/Home/buttoneffect/animated_child.dart';
+import 'package:flutter_schooldev/pages/Home/buttoneffect/animated_floating_button.dart';
+import 'package:flutter_schooldev/pages/Home/buttoneffect/background_overlay.dart';
+import 'package:flutter_schooldev/pages/Home/buttoneffect/speed_dial.dart';
+import 'package:flutter_schooldev/pages/Home/buttoneffect/speed_dial_child.dart';
+import 'package:flutter_schooldev/pages/meal/mealview.dart';
+
+class UnicornOrientation {
+  static const HORIZONTAL = 0;
+  static const VERTICAL = 1;
+}
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -121,54 +132,56 @@ class _HomePageState extends State<HomePage> {
       ),
 //      body: MyStatefulWidget(),
       body: Slideshow(),
-
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-        label: Text('Profile'),
-        icon: Icon(Icons.person),
+      floatingActionButton: SpeedDial(
+        // both default to 16
+        marginRight: 18,
+        marginBottom: 20,
+        animatedIcon: AnimatedIcons.menu_close,
+        animatedIconTheme: IconThemeData(size: 22.0),
+        // this is ignored if animatedIcon is non null
+//         child: Icon(Icons.add),
+//        visible: dialVisible,
+        // If true user is forced to close dial manually
+        // by tapping main button and overlay is not rendered.
+        closeManually: false,
+        curve: Curves.bounceIn,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        onOpen: () => print('OPENING DIAL'),
+        onClose: () => print('DIAL CLOSED'),
+        tooltip: 'Speed Dial',
+        heroTag: 'speed-dial-hero-tag',
         backgroundColor: Colors.lightGreen,
+        foregroundColor: Colors.black,
+        elevation: 8.0,
+        shape: CircleBorder(),
+        children: [
+          SpeedDialChild(
+              child: Icon(Icons.person),
+              backgroundColor: Colors.green,
+              label: 'Profile',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => {
+                print('First Child'),
+
+              }
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.restaurant_menu),
+            backgroundColor: Colors.deepOrange,
+            label: 'Second',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => {
+              print('SECOND CHILD'),
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Mealview()))
+            }
+          ),
+        ],
       ),
 
     );
 
   }
-  
+
 }
 
-//class MyStatefulWidget extends StatefulWidget {
-//  MyStatefulWidget({Key key}) : super(key: key);
-//
-//  @override
-//  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
-//}
-//
-//class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-//  bool selected = false;
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return GestureDetector(
-//      onTap: () {
-//
-//        setState(() {
-//          selected = !selected;
-//        });
-//      },
-//      child: Slideshow(),
-//      child: Center(
-//        child: AnimatedContainer(
-//          width: selected ? 200.0 : 100.0,
-//          height: selected ? 100.0 : 200.0,
-//          color: selected ? Colors.red : Colors.blue,
-//          alignment:
-//          selected ? Alignment.center : AlignmentDirectional.topCenter,
-//          duration: Duration(seconds: 2),
-//          curve: Curves.fastOutSlowIn,
-//          child: FlutterLogo(size: 75),
-//        ),
-//      ),
-//    );
-//  }
-//}

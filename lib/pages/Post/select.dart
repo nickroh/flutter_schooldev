@@ -20,6 +20,14 @@ class _selectState extends State<select> {
         title: new Text(widget.title),
       ),
       body:ListPage(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: Text('new'),
+        icon: Icon(Icons.add_circle),
+        backgroundColor: Colors.lightGreen,
+      ),
     );
   }
 }
