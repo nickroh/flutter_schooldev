@@ -40,22 +40,52 @@ class ShowSlidesState extends State<ShowSlides> {
   static String day = date.toString();
 
 
-  Future getMeal() async {
-    var firestore = Firestore.instance;
+  Future<String> getMeal() async {
+    String tmp;
 
-    QuerySnapshot qn = await firestore.collection('meal').getDocuments();
+    Firestore.instance.collection('meals').document(day)
+        .get().then((DocumentSnapshot) => tmp = DocumentSnapshot.data['meal'] );
 
-    return qn.documents;
+    return tmp;
+
   }
 
-  Future _data;
+  static var meal;
+
+  static String morning= "";
+  static String Lunch= "";
+  static String Dinner = "";
+
 
   @override
   void initState() {
     super.initState();
 
-    _data = getMeal();
+    Firestore.instance
+        .collection('meals')
+        .document(day)
+        .get()
+        .then((DocumentSnapshot ds) async {
+      // use ds as a snapshot
+      meal = ds['meal'].toString();
+      meal = meal.replaceAll('\n', ' ');
+      print('----');
+    });
+    print(meal);
 
+
+
+    List check = new List(3);
+    int cnt=0;
+    for(int i=0;i<meal.length;i++){
+      if(meal[i] == '['){
+        check[cnt] = i;
+        cnt++;
+      }
+    }
+    morning = meal.substring(check[0]+4 , check[1]);
+    Lunch = meal.substring(check[1]+4, check[2]);
+    Dinner = meal.substring(check[2]+4);
     slides.add(
       new Slide(
         title: "Morning",
@@ -64,50 +94,49 @@ class ShowSlidesState extends State<ShowSlides> {
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'RobotoMono'),
-        description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+        description: morning,
         styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
+            color: Colors.black,
             fontSize: 20.0,
-            fontStyle: FontStyle.italic,
+            fontStyle: FontStyle.normal,
             fontFamily: 'Raleway'),
-        pathImage: "images/photo_school.png",
+        pathImage: "assets/morning.png",
       ),
     );
     slides.add(
       new Slide(
         title: "Lunch",
         styleTitle: TextStyle(
-            color: Color(0xff3da4ab),
+            color: Colors.lightGreen,
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'RobotoMono'),
         description:
-        "Ye indulgence unreserved connection alteration appearance",
+        Lunch,
         styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
+            color: Colors.black,
             fontSize: 20.0,
-            fontStyle: FontStyle.italic,
+            fontStyle: FontStyle.normal,
             fontFamily: 'Raleway'),
-        pathImage: "images/photo_museum.png",
+        pathImage: "assets/sun.png",
       ),
     );
     slides.add(
       new Slide(
         title: "Dinner",
         styleTitle: TextStyle(
-            color: Color(0xff3da4ab),
+            color: Colors.lightGreen,
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'RobotoMono'),
         description:
-        "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
+        Dinner,
         styleDescription: TextStyle(
-            color: Color(0xfffe9c8f),
+            color: Colors.black,
             fontSize: 20.0,
-            fontStyle: FontStyle.italic,
+            fontStyle: FontStyle.normal,
             fontFamily: 'Raleway'),
-        pathImage: "images/photo_coffee_shop.png",
+        pathImage: "assets/moon.png",
       ),
     );
   }

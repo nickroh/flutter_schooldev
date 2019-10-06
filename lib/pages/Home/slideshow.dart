@@ -34,7 +34,7 @@ class _SlideshowState extends State<Slideshow> {
     super.initState();
   }
 
-  void _queryDatabase({String tag = 'favourites'}) {
+  void _queryDatabase({String tag = 'School'}) {
     Query query =
     datbase.collection('stories').where('tags', arrayContains: tag);
     // Map the slides to the data payload
@@ -53,13 +53,13 @@ class _SlideshowState extends State<Slideshow> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Your Pins',
+            'My School',
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           Text('FILTER', style: TextStyle(color: Colors.black26)),
-          _buildButton('favourites'),
-          _buildButton('happy'),
-          _buildButton('sad'),
+          _buildButton('School'),
+          _buildButton('Group'),
+          _buildButton('club'),
           _buildButton('tech')
         ],
       ),

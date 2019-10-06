@@ -55,6 +55,9 @@ flutter:
   - assets/image-2.png
   - assets/bg.png
   - assets/Logo.png
+  - assets/morning.png
+  - assets/sun.png
+  - assets/moon.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

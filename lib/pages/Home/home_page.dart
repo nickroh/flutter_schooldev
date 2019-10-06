@@ -121,15 +121,7 @@ class _HomePageState extends State<HomePage> {
     Color textColor = Colors.black;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('SchoolDev'),
-        actions: <Widget>[
-          new FlatButton(
-              child: new Text('Logout',
-                  style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-              onPressed: _signOut)
-        ],
-      ),
+
 //      body: MyStatefulWidget(),
       body: Slideshow(),
       floatingActionButton: SpeedDial(
@@ -163,19 +155,28 @@ class _HomePageState extends State<HomePage> {
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () => {
                 print('First Child'),
-
               }
           ),
           SpeedDialChild(
-            child: Icon(Icons.restaurant_menu),
-            backgroundColor: Colors.deepOrange,
-            label: 'Second',
+              child: Icon(Icons.restaurant_menu),
+              backgroundColor: Colors.deepOrangeAccent,
+              label: 'Meal',
+              labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => {
+                print('SECOND CHILD'),
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Mealview()))
+           }
+              ),
+          SpeedDialChild(
+            child: Icon(Icons.close),
+            backgroundColor: Colors.red,
+            label: 'Logout',
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () => {
-              print('SECOND CHILD'),
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Mealview()))
+              _signOut()
             }
           ),
+
         ],
       ),
 
