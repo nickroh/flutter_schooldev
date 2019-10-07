@@ -6,8 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class select extends StatefulWidget {
   @override
+  select({
+    Key key,
+    @required this.title,
+}):super(key : key);
   _selectState createState() => _selectState();
-  final String title = 'Beta,,';
+  final String title;
 
 }
 

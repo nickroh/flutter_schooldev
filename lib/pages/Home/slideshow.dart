@@ -36,7 +36,7 @@ class _SlideshowState extends State<Slideshow> {
 
   void _queryDatabase({String tag = 'School'}) {
     Query query =
-    datbase.collection('stories').where('tags', arrayContains: tag);
+        datbase.collection('stories').where('tags', arrayContains: tag);
     // Map the slides to the data payload
     slides =
         query.snapshots().map((list) => list.documents.map((doc) => doc.data));
@@ -78,103 +78,86 @@ class _SlideshowState extends State<Slideshow> {
     );
   }
 
-
-  AnimatedContainer _buildStoryPage(Map data, bool active) {
+  AnimatedContainer  _buildStoryPage(Map data, bool active) {
     // Animated properties
     final double blur = active ? 30 : 0;
     final double offset = active ? 20 : 0;
     final double top = active ? 100 : 200;
 
     return AnimatedContainer(
-
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeOutQuint,
-      margin: EdgeInsets.only(top: top, bottom: 50, right: 30),
-
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(data['image']),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black87,
-            blurRadius: blur,
-            offset: Offset(offset, offset),
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeOutQuint,
+        margin: EdgeInsets.only(top: top, bottom: 50, right: 30),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(data['image']),
           ),
-        ],
-      ),
-      child: Center(
-        child: Text(
-          data['title'],
-          style: TextStyle(fontSize: 40, color: Colors.white),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black87,
+              blurRadius: blur,
+              offset: Offset(offset, offset),
+            ),
+          ],
         ),
-      ),
-    );
+        child: Center(
+          child: Text(
+            data['title'],
+            style: TextStyle(fontSize: 40, color: Colors.white),
+          ),
+        ),
+      );
   }
 
+  void testfunction() {
+    print("this is for test");
+  }
+  static String gettitle ="";
   bool selected = false;
   @override
   Widget build(BuildContext context) {
 
     return GestureDetector(
-        onTap: () {
-          selected = true;
-          if(currentPage > 0){
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => select()));
-          }
+      onTap: () {
+        selected = true;
+        if(currentPage > 0){
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => select(title : gettitle)));
+        }
 
-          setState(() {
-            selected = true;
-          });
+        setState(() {
+          selected = true;
+        });
       },
-     child: StreamBuilder(
-      stream: slides,
-      initialData: [],
-      builder: (context, AsyncSnapshot snap) {
-        List slideList = snap.data.toList();
-        return PageView.builder(
-          controller: controller,
-          itemCount: slideList.length + 1,
-          itemBuilder: (context, int currentIndex) {
-            if (currentIndex == 0) {
-              return _buildTagPage();
-            } else if (slideList.length >= currentIndex) {
-              bool active = currentIndex == currentPage;
-              if(currentPage > 0){
-                Map data = slideList[currentPage - 1];
-                print(selected);
-                if(selected == true){
-                  print(data['title']);
-                  selected = false;
+      child: StreamBuilder(
+        stream: slides,
+        initialData: [],
+        builder: (context, AsyncSnapshot snap) {
+          List slideList = snap.data.toList();
+          return PageView.builder(
+            controller: controller,
+            itemCount: slideList.length + 1,
+            itemBuilder: (context, int currentIndex) {
+              if (currentIndex == 0) {
+                return _buildTagPage();
+              } else if (slideList.length >= currentIndex) {
+                bool active = currentIndex == currentPage;
+                if(currentPage > 0){
+                  Map data = slideList[currentPage - 1];
+                  gettitle = data['title'];
+                  print(selected);
+                  if(selected == true){
+                    print(data['title']);
+                    selected = false;
+                  }
                 }
+                return _buildStoryPage(slideList[currentIndex - 1], active);
               }
-              return _buildStoryPage(slideList[currentIndex - 1], active);
-            }
-          },
-        );
-      },
-    ),
+            },
+          );
+        },
+      ),
     );
-//    return StreamBuilder(
-//      stream: slides,
-//      initialData: [],
-//      builder: (context, AsyncSnapshot snap) {
-//        List slideList = snap.data.toList();
-//        return PageView.builder(
-//          controller: controller,
-//          itemCount: slideList.length + 1,
-//          itemBuilder: (context, int currentIndex) {
-//            if (currentIndex == 0) {
-//              return _buildTagPage();
-//            } else if (slideList.length >= currentIndex) {
-//              bool active = currentIndex == currentPage;
-//              return _buildStoryPage(slideList[currentIndex - 1], active);
-//            }
-//          },
-//        );
-//      },
-//    );
   }
 }

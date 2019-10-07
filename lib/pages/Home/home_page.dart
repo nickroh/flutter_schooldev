@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
            }
               ),
           SpeedDialChild(
-            child: Icon(Icons.close),
+            child: Icon(Icons.clear),
             backgroundColor: Colors.red,
             label: 'Logout',
             labelStyle: TextStyle(fontSize: 18.0),
