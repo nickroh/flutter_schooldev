@@ -122,19 +122,59 @@ class DetailPage extends StatefulWidget{
 class _DatailPageState extends State<DetailPage>{
   @override
   Widget build(BuildContext context){
+
+    final welcome = Container(
+      padding: EdgeInsets.all(15.0),
+      
+      child: Text(
+        widget.post.data['title'],
+        style: TextStyle(fontSize: 28.0, color: Colors.black),
+      ),
+    );
+
+    final lorem = Container(
+      padding: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+          color: Color.fromRGBO(241, 241, 241, 0.8),
+          borderRadius: new BorderRadius.only(
+              topLeft: const Radius.circular(10.0),
+              topRight: const Radius.circular(10.0),
+              bottomRight: const Radius.circular(10.0),
+              bottomLeft:const Radius.circular(10.0)
+          )),
+      child: Text(
+        widget.post.data['content'],
+        style: TextStyle(fontSize: 16.0, color: Colors.black),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.post.data['title'])
-      ),
-      body: Container(
-        child: Card(
-          child: ListTile(
-            title: Text(widget.post.data['title']),
-            subtitle: Text(widget.post.data['content']),
-          ),
-        ),
-      ),
 
+      ),
+      body: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(30.0),
+            decoration: BoxDecoration(
+//              gradient: LinearGradient(colors: [
+//                Colors.white,
+//                Colors.lightGreenAccent,
+//              ]),
+            ),
+            child: Column(
+              children: <Widget>[ welcome, lorem],
+            ),
+          )
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: Text('comment'),
+        icon: Icon(Icons.comment),
+        backgroundColor: Colors.lightGreen,
+      ),
     );
   }
 
