@@ -68,12 +68,13 @@ class ShowSlidesState extends State<ShowSlides> {
         .then((DocumentSnapshot ds) async {
       // use ds as a snapshot
       meal = ds['meal'].toString();
-      meal = meal.replaceAll('\n', ' ');
+
       print('----');
+
     });
     print(meal);
 
-
+    meal = meal.replaceAll('\n', ' ');
 
     List check = new List(3);
     int cnt=0;

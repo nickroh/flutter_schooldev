@@ -3,7 +3,6 @@ import 'package:flutter_schooldev/services/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter_schooldev/pages/Home/slideshow.dart';
-import 'package:flutter_schooldev/pages/Post/testpage.dart';
 import 'package:flutter_schooldev/pages/Home/buttoneffect/animated_child.dart';
 import 'package:flutter_schooldev/pages/Home/buttoneffect/animated_floating_button.dart';
 import 'package:flutter_schooldev/pages/Home/buttoneffect/background_overlay.dart';

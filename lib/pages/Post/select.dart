@@ -23,7 +23,7 @@ class _selectState extends State<select> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body:ListPage(),
+      body:ListPage(pagetitle: widget.title),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Add your onPressed code here!
@@ -37,7 +37,12 @@ class _selectState extends State<select> {
 }
 
 class ListPage extends StatefulWidget{
+  ListPage({
+    Key key,
+    @required this.pagetitle,
+  }):super(key : key);
 
+  final String pagetitle;
   @override
   _ListPageState createState() => _ListPageState();
 }
@@ -50,7 +55,7 @@ class _ListPageState extends State<ListPage>{
   Future getPost() async {
     var firestore = Firestore.instance;
 
-    QuerySnapshot qn = await firestore.collection('post').getDocuments();
+    QuerySnapshot qn = await firestore.collection(widget.pagetitle).getDocuments();
 
     return qn.documents;
   }
