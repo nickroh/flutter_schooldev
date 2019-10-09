@@ -2,6 +2,7 @@ import 'package:dynamic_list_view/DynamicListView.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_schooldev/pages/Post/generate.dart';
 
 
 class select extends StatefulWidget {
@@ -27,6 +28,7 @@ class _selectState extends State<select> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Add your onPressed code here!
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => generate()));
         },
         label: Text('new'),
         icon: Icon(Icons.add_circle),
