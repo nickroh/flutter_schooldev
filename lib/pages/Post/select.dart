@@ -28,7 +28,7 @@ class _selectState extends State<select> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Add your onPressed code here!
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => generate()));
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => generate(posttitle : widget.title)));
         },
         label: Text('new'),
         icon: Icon(Icons.add_circle),

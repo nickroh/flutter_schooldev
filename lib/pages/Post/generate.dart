@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_schooldev/pages/Post/select.dart';
 
 
 class generate extends StatefulWidget {
   final bool isEditing;
+  final String posttitle;
+
 
   generateState createState() => generateState();
 
-  generate({this.isEditing = false});
+  generate({this.isEditing = false, this.posttitle});
 }
+
+
 
 class generateState extends State<generate> {
   final _formKey = GlobalKey<FormState>();
+  final databaseReference = Firestore.instance;
+
+  static String contenttitle= "";
+  static String content = "";
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +66,7 @@ class generateState extends State<generate> {
             labelText: 'Title',
             border: OutlineInputBorder()),
         validator: (value) {
+          contenttitle = value;
           if (value.isEmpty) {
             return '내용을 입력해주세요.';
           }
@@ -81,6 +91,7 @@ class generateState extends State<generate> {
         ),
         maxLines: 10,
         validator: (value) {
+          content = value;
           if (value.isEmpty) {
             return '내용을 입력해주세요.';
           }
@@ -99,8 +110,16 @@ class generateState extends State<generate> {
 
   _onSave() async {
     final form = _formKey.currentState;
+
     if (!form.validate()) {
       return;
     }
+
+    await databaseReference.collection(widget.posttitle)
+        .add({
+      'title': contenttitle,
+      'content': content,
+    });
+    Navigator.push(context, MaterialPageRoute(builder: (context) => select(title: widget.posttitle)));
   }
 }
