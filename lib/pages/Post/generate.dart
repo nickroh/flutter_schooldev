@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_schooldev/pages/Post/select.dart';
-
 
 class generate extends StatefulWidget {
   final bool isEditing;
@@ -120,6 +118,6 @@ class generateState extends State<generate> {
       'title': contenttitle,
       'content': content,
     });
-    Navigator.push(context, MaterialPageRoute(builder: (context) => select(title: widget.posttitle)));
+    Navigator.popUntil(context, ModalRoute.withName('/'));
   }
 }
