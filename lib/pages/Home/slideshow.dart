@@ -48,7 +48,14 @@ class _SlideshowState extends State<Slideshow> {
 
   Container _buildTagPage() {
     return Container(
+//      decoration: new BoxDecoration(
+//        image: new DecorationImage(
+//          image: ExactAssetImage('assets/image-1.png'),
+//          fit: BoxFit.fill
+//        ),
+//      ),
       child: Column(
+
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -92,7 +99,7 @@ class _SlideshowState extends State<Slideshow> {
           borderRadius: BorderRadius.circular(20),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage(data['image']),
+            image: NetworkImage(data['image']), // NetworkImage(data['image']) 를 사용하면 custom slide를 만들수 있음
           ),
           boxShadow: [
             BoxShadow(
