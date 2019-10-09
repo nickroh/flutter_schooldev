@@ -35,6 +35,21 @@ class _SlideshowState extends State<Slideshow> {
   }
 
   void _queryDatabase({String tag = 'School'}) {
+
+    if(tag == 'me'){
+
+    }
+    else{
+      Query query =
+      datbase.collection('stories').where('tags', arrayContains: tag);
+      // Map the slides to the data payload
+      slides =
+          query.snapshots().map((list) => list.documents.map((doc) => doc.data));
+      // Update the active tag
+      setState(() {
+        activeTag = tag;
+      });
+    }
     Query query =
         datbase.collection('stories').where('tags', arrayContains: tag);
     // Map the slides to the data payload
@@ -64,10 +79,9 @@ class _SlideshowState extends State<Slideshow> {
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           Text('FILTER', style: TextStyle(color: Colors.black26)),
-          _buildButton('School'),
-          _buildButton('Group'),
-          _buildButton('club'),
-          _buildButton('tech')
+          _buildButton('school'),
+          _buildButton('group'),
+          _buildButton('me')
         ],
       ),
     );
@@ -99,7 +113,7 @@ class _SlideshowState extends State<Slideshow> {
           borderRadius: BorderRadius.circular(20),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage(data['image']), // NetworkImage(data['image']) 를 사용하면 custom slide를 만들수 있음
+            image: ExactAssetImage('assets/slideimage-2.png'), // NetworkImage(data['image']) 를 사용하면 custom slide를 만들수 있음
           ),
           boxShadow: [
             BoxShadow(
@@ -112,7 +126,7 @@ class _SlideshowState extends State<Slideshow> {
         child: Center(
           child: Text(
             data['title'],
-            style: TextStyle(fontSize: 40, color: Colors.white),
+            style: TextStyle(fontSize: 40, color: Colors.black),
           ),
         ),
       );

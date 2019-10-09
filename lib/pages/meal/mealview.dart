@@ -68,14 +68,14 @@ class ShowSlidesState extends State<ShowSlides> {
         .then((DocumentSnapshot ds) async {
       // use ds as a snapshot
       meal = ds['meal'].toString();
-
-      print('----');
-
     });
+
     print(meal);
 
     meal = meal.replaceAll('\n', ' ');
 
+
+    print(meal);
     List check = new List(3);
     int cnt=0;
     for(int i=0;i<meal.length;i++){
@@ -87,8 +87,9 @@ class ShowSlidesState extends State<ShowSlides> {
     morning = meal.substring(check[0]+4 , check[1]);
     Lunch = meal.substring(check[1]+4, check[2]);
     Dinner = meal.substring(check[2]+4);
-    slides.add(
-      new Slide(
+
+    slides.add (
+      new Slide (
         title: "Morning",
         styleTitle: TextStyle(
             color: Colors.lightGreen,
@@ -140,6 +141,14 @@ class ShowSlidesState extends State<ShowSlides> {
         pathImage: "assets/moon.png",
       ),
     );
+  }
+  Widget getErrorWidget(FlutterErrorDetails error) {
+    return Center(
+      child: Text("Error appeared."),
+    );
+  }
+  void makeslide(){
+
   }
 
   void onDonePress() {
