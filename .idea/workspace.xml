@@ -6,27 +6,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92a35ed4-2a5a-417d-8677-26a23460549e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/Profile/profileedit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/4.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/4.10.2/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/4.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/4.10.2/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/4.10.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/4.10.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/4.10.2/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/4.10.2/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/4.10.2/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/4.10.2/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/Home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/Home/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/Home/slideshow.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/Home/slideshow.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/Profile/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/Profile/profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/auth/root_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/auth/root_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/login_signup_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/auth/login_signup_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/meal/mealview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/meal/mealview.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/authentication.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/services/authentication.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/auth/authentication.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="92a35ed4-2a5a-417d-8677-26a23460549e" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -39,26 +19,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DockManager">
-    <window id="3">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="slideshow.dart" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/lib/pages/Home/slideshow.dart">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="331">
-                    <caret line="61" selection-start-line="61" selection-end-line="61" />
-                    <folding>
-                      <element signature="e#0#39#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
     <window id="1">
       <content type="file-editors">
         <state>
@@ -103,13 +63,33 @@
         </state>
       </content>
     </window>
+    <window id="3">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file leaf-file-name="slideshow.dart" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/lib/pages/Home/slideshow.dart">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="331">
+                    <caret line="61" selection-start-line="61" selection-end-line="61" />
+                    <folding>
+                      <element signature="e#0#39#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="root_page.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/pages/auth/root_page.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
+            <state relative-caret-position="1577">
               <caret line="86" column="31" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -128,7 +108,7 @@
       <file leaf-file-name="mealview.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/pages/meal/mealview.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
+            <state relative-caret-position="2584">
               <caret line="140" column="32" selection-start-line="140" selection-start-column="32" selection-end-line="140" selection-end-column="32" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -140,7 +120,7 @@
       <file leaf-file-name="pubspec.yaml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pubspec.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="931">
               <caret line="49" selection-start-line="49" selection-end-line="49" />
             </state>
           </provider>
@@ -149,7 +129,7 @@
       <file leaf-file-name="profileedit.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/pages/Profile/profileedit.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
+            <state relative-caret-position="429">
               <caret line="387" column="56" selection-start-line="387" selection-start-column="56" selection-end-line="387" selection-end-column="56" />
             </state>
           </provider>
@@ -245,10 +225,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1939" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -256,9 +236,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -321,6 +299,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -408,32 +388,32 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="15" show_stripe_button="false" />
-      <window_info id="Build Variants" order="4" sideWeight="0.5022523" side_tool="true" weight="0.14228188" />
-      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50067115" side_tool="true" weight="0.3651926" />
-      <window_info anchor="bottom" id="Dart Analysis" order="13" weight="0.3281027" />
-      <window_info anchor="right" id="Flutter Outline" order="4" />
-      <window_info anchor="bottom" id="Logcat" order="14" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="Designer" order="0" />
-      <window_info id="Structure" order="6" sideWeight="0.5021398" side_tool="true" weight="0.24899329" />
-      <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="9" weight="0.36907217" />
       <window_info anchor="bottom" id="TODO" order="12" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.15121256" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info id="Image Layers" order="2" />
+      <window_info id="Build Variants" order="4" sideWeight="0.5022523" side_tool="true" weight="0.14228188" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50067115" side_tool="true" weight="0.3651926" />
       <window_info anchor="bottom" id="Flutter Performance" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Dart Analysis" order="13" weight="0.3281027" />
       <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49932885" weight="0.0014265336" />
       <window_info anchor="bottom" id="Version Control" order="1" />
       <window_info anchor="bottom" id="Terminal" order="5" weight="0.32524964" />
+      <window_info anchor="right" id="Flutter Outline" order="4" />
+      <window_info anchor="bottom" id="Logcat" order="14" />
       <window_info id="Captures" order="7" side_tool="true" weight="0.25" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Designer" order="0" />
       <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4978602" visible="true" weight="0.20939597" />
+      <window_info id="Structure" order="6" sideWeight="0.5021398" side_tool="true" weight="0.24899329" />
+      <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.36907217" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="right" id="Flutter Inspector" order="3" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.15121256" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
@@ -713,7 +693,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/pages/auth/root_page.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
+        <state relative-caret-position="1577">
           <caret line="86" column="31" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -748,7 +728,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/pages/meal/mealview.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
+        <state relative-caret-position="2584">
           <caret line="140" column="32" selection-start-line="140" selection-start-column="32" selection-end-line="140" selection-end-column="32" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -758,7 +738,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="931">
           <caret line="49" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
@@ -775,7 +755,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/pages/Profile/profileedit.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
+        <state relative-caret-position="429">
           <caret line="387" column="56" selection-start-line="387" selection-start-column="56" selection-end-line="387" selection-end-column="56" />
         </state>
       </provider>
