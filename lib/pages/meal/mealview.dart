@@ -102,7 +102,7 @@ class ShowSlidesState extends State<ShowSlides> {
             fontSize: 20.0,
             fontStyle: FontStyle.normal,
             fontFamily: 'Raleway'),
-        pathImage: "assets/morning.png",
+        pathImage: "assets/white.png",
       ),
     );
     slides.add(
@@ -120,7 +120,7 @@ class ShowSlidesState extends State<ShowSlides> {
             fontSize: 20.0,
             fontStyle: FontStyle.normal,
             fontFamily: 'Raleway'),
-        pathImage: "assets/sun.png",
+        pathImage: "assets/white.png",
       ),
     );
     slides.add(
@@ -138,7 +138,7 @@ class ShowSlidesState extends State<ShowSlides> {
             fontSize: 20.0,
             fontStyle: FontStyle.normal,
             fontFamily: 'Raleway'),
-        pathImage: "assets/moon.png",
+        pathImage: "assets/white.png",
       ),
     );
   }

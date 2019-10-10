@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_schooldev/services/authentication.dart';
+import 'package:flutter_schooldev/pages/auth/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter_schooldev/pages/Home/slideshow.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_schooldev/pages/Home/buttoneffect/background_overlay.dar
 import 'package:flutter_schooldev/pages/Home/buttoneffect/speed_dial.dart';
 import 'package:flutter_schooldev/pages/Home/buttoneffect/speed_dial_child.dart';
 import 'package:flutter_schooldev/pages/meal/mealview.dart';
+import 'package:flutter_schooldev/pages/Profile/profile.dart';
 
 class UnicornOrientation {
   static const HORIZONTAL = 0;
@@ -16,12 +17,13 @@ class UnicornOrientation {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.auth, this.userId, this.onSignedOut})
+  HomePage({Key key, this.auth, this.userId, this.onSignedOut, this.username})
       : super(key: key);
 
   final BaseAuth auth;
   final VoidCallback onSignedOut;
   final String userId;
+  final String username;
 
   final PageController ctrl = PageController();
 
@@ -119,10 +121,19 @@ class _HomePageState extends State<HomePage> {
     Color bgColor = Colors.green;
     Color textColor = Colors.black;
 
+    Widget _buildWaitingScreen() {
+      return Scaffold(
+        body: Container(
+          alignment: Alignment.center,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
 
 //      body: MyStatefulWidget(),
-      body: Slideshow(),
+      body: Slideshow(tagusername: widget.username),
       floatingActionButton: SpeedDial(
         // both default to 16
         marginRight: 18,
@@ -150,16 +161,23 @@ class _HomePageState extends State<HomePage> {
           SpeedDialChild(
               child: Icon(Icons.person),
               backgroundColor: Colors.green,
-              label: 'Profile',
+              label: '프로필',
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () => {
                 print('First Child'),
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage(profile: widget.auth)))
               }
           ),
+    SpeedDialChild(
+    child: Icon(Icons.folder),
+    backgroundColor: Colors.yellow,
+    label: '커뮤니티 규정',
+    labelStyle: TextStyle(fontSize: 18.0),
+    ),
           SpeedDialChild(
               child: Icon(Icons.restaurant_menu),
               backgroundColor: Colors.deepOrangeAccent,
-              label: 'Meal',
+              label: '급식',
               labelStyle: TextStyle(fontSize: 18.0),
               onTap: () => {
                 print('SECOND CHILD'),
@@ -169,7 +187,7 @@ class _HomePageState extends State<HomePage> {
           SpeedDialChild(
             child: Icon(Icons.clear),
             backgroundColor: Colors.red,
-            label: 'Logout',
+            label: '로그아웃',
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () => {
               _signOut()

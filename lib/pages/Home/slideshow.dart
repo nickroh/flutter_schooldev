@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:flutter_schooldev/pages/Post/select.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Slideshow extends StatefulWidget {
   @override
+
+  final String tagusername;
   final bool selected;
-  Slideshow({this.selected});
+
+  Slideshow({this.selected, this.tagusername});
   _SlideshowState createState() => _SlideshowState();
 }
 
@@ -16,13 +20,15 @@ class _SlideshowState extends State<Slideshow> {
 
   final Firestore datbase = Firestore.instance;
   Stream slides;
-  String activeTag = 'favourites';
+  String activeTag = 'school';
+  String CustomTag;
 
   int currentPage = 0;
 
   @override
   void initState() {
     _queryDatabase();
+    CustomTag = widget.tagusername;
     controller.addListener(() {
       int next = controller.page.round();
       if (currentPage != next) {
@@ -34,15 +40,13 @@ class _SlideshowState extends State<Slideshow> {
     super.initState();
   }
 
-  void _queryDatabase({String tag = 'School'}) {
+  void _queryDatabase({String tag = 'school'}) {
 
     if(tag == 'me'){
-
-    }
-    else{
       Query query =
-      datbase.collection('stories').where('tags', arrayContains: tag);
+      datbase.collection('stories').where('tags', arrayContains: CustomTag);
       // Map the slides to the data payload
+      print(widget.tagusername);
       slides =
           query.snapshots().map((list) => list.documents.map((doc) => doc.data));
       // Update the active tag
@@ -50,15 +54,19 @@ class _SlideshowState extends State<Slideshow> {
         activeTag = tag;
       });
     }
-    Query query =
-        datbase.collection('stories').where('tags', arrayContains: tag);
-    // Map the slides to the data payload
-    slides =
-        query.snapshots().map((list) => list.documents.map((doc) => doc.data));
-    // Update the active tag
-    setState(() {
-      activeTag = tag;
-    });
+    else{
+      Query query =
+      datbase.collection('stories').where('tags', arrayContains: tag);
+      // Map the slides to the data payload
+      print(tag);
+      slides =
+          query.snapshots().map((list) => list.documents.map((doc) => doc.data));
+      // Update the active tag
+      setState(() {
+        activeTag = tag;
+      });
+    }
+
   }
 
   Container _buildTagPage() {

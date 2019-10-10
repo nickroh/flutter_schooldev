@@ -1,276 +1,317 @@
-//import 'dart:io';
-//import 'dart:async';
-//import 'package:flutter/material.dart';
-//import 'package:flutter_appavailability/flutter_appavailability.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-//import 'package:share/share.dart';
-//import 'package:url_launcher/url_launcher.dart';
-//import 'package:flutter_launch/flutter_launch.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//
-//
-//class ViewPage extends StatefulWidget {
-//  static String tag = 'view-page';
-//
-//  @override
-//  _ViewPageState createState() => _ViewPageState();
-//}
-//
-//class _ViewPageState extends State<ViewPage> {
-//  static String defaultMessage = "Não informado";
-//
-//  bool existWhatsapp = false;
-//  Map contact;
-//
-////  HomeBloc blocHome;
-//  // final eeee = ViewModule.to
-//  //     .getBloc<ViewBloc>(); (??) problem using two bloc import! What????
-//
-//  @override
-//  void initState() {
-////    blocHome = HomeModule.to.getBloc<HomeBloc>();
-//    super.initState();
-//  }
-//
-//  Future<void> getApps() async {
-//    try {
-//      if (Platform.isAndroid) {
-//        await AppAvailability.checkAvailability("com.whatsapp");
-//      } else if (Platform.isIOS) {
-//        await AppAvailability.checkAvailability("whatsapp://");
-//      }
-//      this.existWhatsapp = true;
-//    } catch (err) {
-//      this.existWhatsapp = false;
-//    }
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    getApps();
-//    ListView content(context, Map snapshot) {
-//      return ListView(
-//        children: <Widget>[
-//          Column(
-//            children: <Widget>[
-//              buildHeader(context, snapshot['name']),
-//              buildInformation(
-//                  snapshot['phoneNumber'], snapshot['email'], snapshot['name']),
-//            ],
-//          )
-//        ],
-//      );
-//    }
-//
-//    return Scaffold(
-//      appBar: PreferredSize(
-//        preferredSize: const Size(double.infinity, kToolbarHeight),
-//        child: StreamBuilder(
-////          stream: blocHome.favoriteOut,
-//          builder: (context, snapshot) {
-//            if (!snapshot.hasData) {
-//              return Center(child: CircularProgressIndicator());
-//            }
-//
-//            if (snapshot.hasError) {
-//              print(snapshot.error);
-//              return Text('Error: ${snapshot.error}');
-//            } else {
-//              return AppBar(
-//                elevation: 0,
-//                actions: <Widget>[
-//                  IconButton(
-//                    color: Colors.white,
-//                    icon: snapshot.data
-//                        ? Icon(Icons.star)
-//                        : Icon(Icons.star_border),
-//                    onPressed: () {
-////                      blocHome.updateFavorite(
-////                          this.contact['id'], !snapshot.data);
-////                    },
-//                  ),
-//                  IconButton(
-//                    color: Colors.white,
-//                    icon: Icon(Icons.edit),
-//                    onPressed: () {
-////                      EditPage.contact = this.contact;
-//                      Navigator.push(
-//                        context,
-////                        MaterialPageRoute(builder: (context) => EditPage()),
-//                      );
-//                    },
-//                  ),
-//                  // IconButton(
-//                  //   color: Colors.white,
-//                  //   icon: Icon(Icons.more_vert),
-//                  //   onPressed: () {},
-//                  // ),
-//                ],
-//              );
-//            }
-//          },
-//        ),
-//      ),
-//      body: StreamBuilder(
-//        stream: blocHome.contactOut,
-//        builder: (context, snapshot) {
-//          if (!snapshot.hasData) {
-//            return Center(child: CircularProgressIndicator());
-//          }
-//
-//          if (snapshot.hasError) {
-//            print(snapshot.error);
-//            return Text('Error: ${snapshot.error}');
-//          } else {
-//            this.contact = snapshot.data;
-//            blocHome.setFavorite(snapshot.data['favorite'] == 1);
-//            return content(context, snapshot.data);
-//          }
-//        },
-//      ),
-//    );
-//  }
-//
-//  void whatsAppOpen(phoneNumber, message) async {
-//    await FlutterLaunch.launchWathsApp(phone: phoneNumber, message: message);
-//  }
-//
-//  _textMe(String number) async {
-//    // Android
-//    String uri = "sms:$number";
-//    if (await canLaunch(uri)) {
-//      await launch(uri);
-//    } else {
-//      // iOS
-//      String uri = "sms:$number";
-//      if (await canLaunch(uri)) {
-//        await launch(uri);
-//      } else {
-//        throw 'Could not launch $uri';
-//      }
-//    }
-//  }
-//
-//  _launchCaller(String number) async {
-//    String url = "tel:$number";
-//    if (await canLaunch(url)) {
-//      await launch(url);
-//    } else {
-//      throw 'Could not launch $url';
-//    }
-//  }
-//
-//  Container buildHeader(BuildContext context, String name) {
-//    return Container(
-//      decoration: BoxDecoration(color: Colors.indigo),
-//      width: MediaQuery.of(context).size.width,
-//      height: MediaQuery.of(context).size.height * 0.40,
-//      child: Column(
-//        children: <Widget>[
-//          SizedBox(height: 20),
-//          SizedBox(height: 20),
-//          Icon(
-//            Icons.person,
-//            color: Colors.white,
-//            size: 160,
-//          ),
-//          Row(
-//            mainAxisAlignment: MainAxisAlignment.center,
-//            children: <Widget>[
-//              Padding(
-//                padding: const EdgeInsets.all(8),
-//                child: Text(
-//                  name,
-//                  style: TextStyle(color: Colors.white, fontSize: 30),
-//                ),
-//              ),
-//            ],
-//          ),
-//        ],
-//      ),
-//    );
-//  }
-//
-//  Padding buildInformation(phoneNumber, email, nome) {
-//    return Padding(
-//      padding: const EdgeInsets.all(8.0),
-//      child: Column(
-//        children: <Widget>[
-//          Card(
-//            child: ListTile(
-//              title: Text(phoneNumber.toString().isNotEmpty
-//                  ? phoneNumber
-//                  : defaultMessage),
-//              subtitle: Text(
-//                "Telefone",
-//                style: TextStyle(color: Colors.black54),
-//              ),
-//              leading: IconButton(
-//                icon: Icon(Icons.phone, color: Colors.indigo),
-//                onPressed: () {
-//                  _launchCaller(phoneNumber);
-//                },
-//              ),
-//              trailing: IconButton(
-//                icon: Icon(Icons.message),
-//                onPressed: () {
-//                  _textMe(phoneNumber);
-//                },
-//              ),
-//            ),
-//          ),
-//          Card(
-//            child: ListTile(
-//              title: Text(email.toString().isNotEmpty ? email : defaultMessage),
-//              subtitle: Text(
-//                "E-mail",
-//                style: TextStyle(color: Colors.black54),
-//              ),
-//              leading: IconButton(
-//                  icon: Icon(Icons.email, color: Colors.indigo),
-//                  onPressed: () {}),
-//            ),
-//          ),
-//          Card(
-//            child: ListTile(
-//              title: Text(
-//                "Enviar contato",
-//              ),
-//              subtitle: Text(
-//                "Compartilhar",
-//                style: TextStyle(color: Colors.black54),
-//              ),
-//              leading: IconButton(
-//                  icon: Icon(Icons.share, color: Colors.indigo),
-//                  onPressed: () {
-//                    Share.share("""
-//                        Nome: $nome
-//                        Tel: $phoneNumber
-//                      """);
-//                  }),
-//            ),
-//          ),
-//          Card(
-//            child: existWhatsapp
-//                ? ListTile(
-//              title: Text(
-//                "Abrir no Whatsapp",
-//              ),
-//              subtitle: Text(
-//                "Whatsapp",
-//                style: TextStyle(color: Colors.black54),
-//              ),
-//              leading: IconButton(
-//                  icon: Icon(FontAwesomeIcons.whatsapp,
-//                      color: Colors.indigo),
-//                  onPressed: () {
-//                    whatsAppOpen(phoneNumber.toString(), "");
-//                  }),
-//            )
-//                : Container(),
-//          ),
-//        ],
-//      ),
-//    );
-//  }
-//}
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_schooldev/pages/auth/authentication.dart';
+
+class ProfilePage extends StatefulWidget {
+  ProfilePage({this.profile});
+
+  final BaseAuth profile;
+
+  @override
+  MapScreenState createState() => MapScreenState();
+}
+
+enum AuthStatus {
+  NOT_DETERMINED,
+  NOT_LOGGED_IN,
+  LOGGED_IN,
+}
+
+class MapScreenState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
+
+  final _formKey = GlobalKey<FormState>();
+
+  AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
+  String _userId = "";
+
+  bool _status = true;
+  final FocusNode myFocusNode = FocusNode();
+  String _username ;
+  String _userEmail= "";
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.profile.getCurrentUser().then((user) {
+      setState(() {
+        if (user != null) {
+          _username = user?.displayName;
+          _userEmail = user?.email;
+
+        }
+        print(user?.displayName);
+        print(_userId);
+        authStatus =
+        user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
+      });
+    });
+  }
+
+  TextEditingController nameController = new TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Profile'),
+      ),
+        body: new Container(
+          color: Colors.white,
+          child: new ListView(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  new Container(
+                    height: 250.0,
+                    color: Colors.white,
+                    child: new Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 20.0),
+                          child: new Stack(fit: StackFit.loose, children: <Widget>[
+                            new Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                new Container(
+                                    width: 140.0,
+                                    height: 140.0,
+                                    decoration: new BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: new DecorationImage(
+                                        image: new ExactAssetImage(
+                                            'assets/profile.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )),
+                              ],
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(top: 90.0, right: 100.0),
+                                child: new Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+
+                                  ],
+                                )),
+                          ]),
+                        )
+                      ],
+                    ),
+                  ),
+                  new Container(
+                    color: Color(0xffFFFFFF),
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 25.0),
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 25.0),
+                              child: new Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      new Text(
+                                        'Parsonal Information',
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  new Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      _status ? _getEditIcon() : new Container(),
+                                    ],
+                                  )
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 25.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      new Text(
+                                        'Name',
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 2.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Flexible(
+                                    child: new TextField(
+                                      controller: nameController,
+                                      textAlign: TextAlign.left,
+                                      decoration: InputDecoration(
+                                        hintText: _username,
+                                      ),
+
+                                      enabled: !_status,
+
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 25.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      new Text(
+                                        'Email ID',
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 2.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Flexible(
+                                    child: new TextField(
+                                      decoration: InputDecoration(
+                                          hintText: _userEmail),
+                                      enabled: false,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          !_status ? _getActionButtons() : new Container(),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ));
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    myFocusNode.dispose();
+    super.dispose();
+  }
+
+  Widget _getActionButtons() {
+    return Padding(
+      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 45.0),
+      child: new Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(right: 10.0),
+              child: Container(
+                  child: new RaisedButton(
+                    child: new Text("Save"),
+                    textColor: Colors.white,
+                    color: Colors.green,
+                    onPressed: () {
+
+                      _onSave();
+
+                      setState(() {
+                        _status = true;
+                        FocusScope.of(context).requestFocus(new FocusNode());
+                      });
+                    },
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(20.0)),
+                  )),
+            ),
+            flex: 2,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Container(
+                  child: new RaisedButton(
+                    child: new Text("Cancel"),
+                    textColor: Colors.white,
+                    color: Colors.red,
+                    onPressed: () {
+                      setState(() {
+                        _status = true;
+                        FocusScope.of(context).requestFocus(new FocusNode());
+                      });
+                    },
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(20.0)),
+                  )),
+            ),
+            flex: 2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _getEditIcon() {
+    return new GestureDetector(
+      child: new CircleAvatar(
+        backgroundColor: Colors.green,
+        radius: 14.0,
+        child: new Icon(
+          Icons.edit,
+          color: Colors.white,
+          size: 16.0,
+        ),
+      ),
+      onTap: () {
+        setState(() {
+          _status = false;
+        });
+      },
+    );
+  }
+  _onSave() async {
+
+    FirebaseAuth.instance.currentUser().then((val) {
+      UserUpdateInfo updateUser = UserUpdateInfo();
+      updateUser.displayName = nameController.text;
+      val.updateProfile(updateUser);
+    });
+  }
+}

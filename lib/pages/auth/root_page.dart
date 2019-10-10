@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_schooldev/pages/login_signup_page.dart';
-import 'package:flutter_schooldev/services/authentication.dart';
+import 'package:flutter_schooldev/pages/auth/login_signup_page.dart';
+import 'package:flutter_schooldev/pages/auth/authentication.dart';
 import 'package:flutter_schooldev/pages/Home/home_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -21,6 +21,7 @@ enum AuthStatus {
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
+  String _username;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _RootPageState extends State<RootPage> {
       setState(() {
         if (user != null) {
           _userId = user?.uid;
+          _username = user?.displayName;
         }
         authStatus =
         user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
@@ -82,6 +84,7 @@ class _RootPageState extends State<RootPage> {
             userId: _userId,
             auth: widget.auth,
             onSignedOut: _onSignedOut,
+            username: _username,
           );
         } else return _buildWaitingScreen();
         break;
