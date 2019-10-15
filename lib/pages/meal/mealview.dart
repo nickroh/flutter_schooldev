@@ -84,6 +84,7 @@ class ShowSlidesState extends State<ShowSlides> {
         cnt++;
       }
     }
+
     morning = meal.substring(check[0]+4 , check[1]);
     Lunch = meal.substring(check[1]+4, check[2]);
     Dinner = meal.substring(check[2]+4);
