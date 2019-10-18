@@ -25,19 +25,27 @@ meal = await school.getMeal()
   const mealCustom = await school.getMeal(2019, 10)
 
 
-for(var objVarName in mealCustom) {
+// for(var objVarName in mealCustom) {
+//     console.log(mealCustom[objVarName])
+//     db.collection("meals").add({
+//         meal : mealCustom[objVarName],
+//         date : "day" + objVarName
+//     }).then(function(docRef) {
+//         console.log("Document written with ID: ", docRef.id);
+//     })
+//     .catch(function(error) {
+//         console.error("Error adding document: ", error);
+//     });
+// }
+for(var objVarName in mealCustom){
     console.log(mealCustom[objVarName])
-    db.collection("meal").add({
-        meal : mealCustom[objVarName],
-        date : "day"+ objVarName
-    }).then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
-}
+    data = {
+        date : "day" + objVarName,
+        meal : mealCustom[objVarName]
+    }
+    db.collection('meals').doc(objVarName).set(data);
 
+}
 }
 sampleAsync()
 
