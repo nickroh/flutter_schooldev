@@ -22,7 +22,7 @@ meal = await school.getMeal()
 
 
    // 년도와 달을 지정하여 해당 날짜의 데이터를 조회할 수 있습니다.
-  const mealCustom = await school.getMeal(2019, 11)
+  const mealCustom = await school.getMeal(2019, 12)
 
 
 // for(var objVarName in mealCustom) {
