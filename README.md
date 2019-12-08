@@ -9,6 +9,7 @@ SchoolDev에 대한 설명
 	* Flutter플러그인 설치
 	* Firebase 설정하기
 </p>
+</details>
 
 ## Credits
 
