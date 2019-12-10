@@ -15,6 +15,7 @@ SchoolDev에 대한 설명 --
 
 
 
+
 ## 커스터마이즈
 
 <details><summary>색, 사진, 아이콘 바꾸기</summary>
