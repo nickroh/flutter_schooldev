@@ -1,9 +1,5 @@
+title: Cayman theme
+description: Cayman is a clean, responsive theme for GitHub Pages.
+show_downloads: true
+google_analytics:
 theme: jekyll-theme-cayman
-# Name of your site (displayed in the header)
-name: School-Dev
-
-
-# Short bio or description (displayed in the header)
-description: School-Dev instruction
-
-
