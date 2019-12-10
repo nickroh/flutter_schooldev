@@ -7,7 +7,7 @@ SchoolDev에 대한 설명 --
     <div>
         <p>
     		<li> <a href="./start-androidstudio.html"> Android Studio 설치</a></li>
-    		<li> <a href="gh-pages/start-2.md"> Flutter플러그인 설치</a></li>
+    		<li> <a href="posting/start-2.html"> Flutter플러그인 설치</a></li>
     		<li> <a href="gh-pages/start-3.md"> Firebase 설정하기</a></li>    
 		</p>
     </div>
