@@ -6,7 +6,7 @@ SchoolDev에 대한 설명 --
 <details><summary>개발 환경 만들기</summary>
     <div>
         <p>
-    		<li> <a href="_posts/2019-12-10-start-androidstudio.md"> Android Studio 설치</a></li>
+    		<li> <a href="./2019-12-10-start-androidstudio.md"> Android Studio 설치</a></li>
     		<li> <a href="gh-pages/start-2.md"> Flutter플러그인 설치</a></li>
     		<li> <a href="gh-pages/start-3.md"> Firebase 설정하기</a></li>    
 		</p>
