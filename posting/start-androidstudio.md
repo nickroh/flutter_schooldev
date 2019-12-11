@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Another page
-description: This is just another page
+title: Start AndroidStudio
+description: Install AndroidStudio
 ---
 
 # Android Studio 설치하기
