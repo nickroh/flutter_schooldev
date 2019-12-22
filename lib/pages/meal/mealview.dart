@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'intro_slider.dart';
 import 'slide_object.dart';
 import 'dot_animation_enum.dart';
+import 'package:flutter_schooldev/pages/Home/home_page.dart';
 
 class Mealview extends StatefulWidget{
   Mealview({Key key}) : super(key:key);
@@ -12,8 +13,10 @@ class Mealview extends StatefulWidget{
 }
 
 class MealviewState extends State<Mealview>{
+
   @override
   Widget build(BuildContext context){
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Meal'),
@@ -45,7 +48,7 @@ class ShowSlidesState extends State<ShowSlides> {
 
     Firestore.instance.collection('meals').document(day)
         .get().then((DocumentSnapshot) => tmp = DocumentSnapshot.data['meal'] );
-
+    print('hihihi');
     return tmp;
 
   }
@@ -71,7 +74,6 @@ class ShowSlidesState extends State<ShowSlides> {
     });
 
     print(meal);
-
     meal = meal.replaceAll('\n', ' ');
 
 

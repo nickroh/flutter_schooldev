@@ -168,22 +168,22 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage(profile: widget.auth)))
               }
           ),
-    SpeedDialChild(
-    child: Icon(Icons.folder),
-    backgroundColor: Colors.yellow,
-    label: '커뮤니티 규정',
-    labelStyle: TextStyle(fontSize: 18.0),
-    ),
+          SpeedDialChild(
+              child: Icon(Icons.folder),
+              backgroundColor: Colors.yellow,
+              label: '커뮤니티 규정',
+              labelStyle: TextStyle(fontSize: 18.0),
+            ),
           SpeedDialChild(
               child: Icon(Icons.restaurant_menu),
               backgroundColor: Colors.deepOrangeAccent,
               label: '급식',
               labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () => {
-                print('SECOND CHILD'),
-                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Mealview()))
-           }
-              ),
+                onTap: () => {
+                  print('SECOND CHILD'),
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Mealview()))
+                }
+          ),
           SpeedDialChild(
             child: Icon(Icons.clear),
             backgroundColor: Colors.red,
