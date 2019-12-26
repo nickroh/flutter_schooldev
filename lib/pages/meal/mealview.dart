@@ -13,22 +13,57 @@ class Mealview extends StatefulWidget{
 }
 
 class MealviewState extends State<Mealview>{
+  static var Meal;
+
+  static var now = new DateTime.now();
+  static var date = now.day;
+  static String day = date.toString();
+
+
+  void initState(){
+    print("initial for MealviewState");
+
+    Firestore.instance
+        .collection('meals')
+        .document(day)
+        .get()
+        .then((DocumentSnapshot ds) async {
+      // use ds as a snapshot
+      Meal = ds['meal'].toString();
+    });
+
+    print(Meal);
+  }
+
+  Widget _buildWaitingScreen() {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context){
+    if(Meal == null){
+      return _buildWaitingScreen();
+    }else{
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Meal'),
+        ),
+        body: ShowSlides(meal: Meal),
+      );
+    }
 
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Meal'),
-      ),
-      body: ShowSlides(),
-    );
   }
 }
 
 class ShowSlides extends StatefulWidget {
-  ShowSlides({Key key}) : super(key: key);
+  ShowSlides({Key key, this.meal}) : super(key: key);
 
+  String meal;
   @override
   ShowSlidesState createState() => new ShowSlidesState();
 }
@@ -63,15 +98,15 @@ class ShowSlidesState extends State<ShowSlides> {
   @override
   void initState() {
     super.initState();
-
-    Firestore.instance
-        .collection('meals')
-        .document(day)
-        .get()
-        .then((DocumentSnapshot ds) async {
-      // use ds as a snapshot
-      meal = ds['meal'].toString();
-    });
+      meal = widget.meal;
+//    Firestore.instance
+//        .collection('meals')
+//        .document(day)
+//        .get()
+//        .then((DocumentSnapshot ds) async {
+//      // use ds as a snapshot
+//      meal = ds['meal'].toString();
+//    });
 
     print(meal);
     meal = meal.replaceAll('\n', ' ');

@@ -189,9 +189,9 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.red,
             label: '로그아웃',
             labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => {
-              _signOut()
-            }
+              onTap: () => {
+                _signOut()
+              }
           ),
 
         ],
