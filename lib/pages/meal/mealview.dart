@@ -5,6 +5,7 @@ import 'slide_object.dart';
 import 'dot_animation_enum.dart';
 import 'package:flutter_schooldev/pages/Home/home_page.dart';
 
+
 class Mealview extends StatefulWidget{
   Mealview({Key key}) : super(key:key);
 
@@ -13,23 +14,38 @@ class Mealview extends StatefulWidget{
 }
 
 class MealviewState extends State<Mealview>{
-  static var Meal;
+  String Meal;
 
   static var now = new DateTime.now();
   static var date = now.day;
   static String day = date.toString();
 
+  Future<String> getMeal() async {
+    String tmp;
+
+        await Firestore.instance
+        .collection('meals')
+        .document(day)
+        .get()
+        .then((DocumentSnapshot ds) async {
+      // use ds as a snapshot
+      tmp = ds['meal'].toString();
+    });
+    return tmp;
+
+  }
 
   void initState(){
     print("initial for MealviewState");
-
+    getMeal();
     Firestore.instance
         .collection('meals')
         .document(day)
         .get()
         .then((DocumentSnapshot ds) async {
       // use ds as a snapshot
-      Meal = ds['meal'].toString();
+      var tmp = await ds['meal'];
+      Meal = tmp;
     });
 
     print(Meal);
@@ -44,21 +60,42 @@ class MealviewState extends State<Mealview>{
     );
   }
 
+
+
   @override
   Widget build(BuildContext context){
-    if(Meal == null){
-      return _buildWaitingScreen();
-    }else{
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Meal'),
-        ),
-        body: ShowSlides(meal: Meal),
-      );
-    }
-
-  }
+        return new Scaffold(
+          appBar: new AppBar(
+            title: new Text('Meal'),
+          ),
+          body: FutureBuilder<String>(
+            future: getMeal(),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot){
+              if (snapshot.hasData){
+                print(snapshot.data + 'snapshot data');
+                return ShowSlides(meal: snapshot.data);
+              }else{
+                print('no data');
+                return _buildWaitingScreen();
+              }
+            },
+          )
+          //ShowSlides(meal: Meal),
+        );
+      }
+//    if(Meal == null){
+//      return _buildWaitingScreen();
+//    }else{
+//      return new Scaffold(
+//        appBar: new AppBar(
+//          title: new Text('Meal'),
+//        ),
+//        body: ShowSlides(meal: Meal),
+//      );
+//    }
+//
 }
+
 
 class ShowSlides extends StatefulWidget {
   ShowSlides({Key key, this.meal}) : super(key: key);
@@ -78,15 +115,7 @@ class ShowSlidesState extends State<ShowSlides> {
   static String day = date.toString();
 
 
-  Future<String> getMeal() async {
-    String tmp;
 
-    Firestore.instance.collection('meals').document(day)
-        .get().then((DocumentSnapshot) => tmp = DocumentSnapshot.data['meal'] );
-    print('hihihi');
-    return tmp;
-
-  }
 
   static var meal;
 
