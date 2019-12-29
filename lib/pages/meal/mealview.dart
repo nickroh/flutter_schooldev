@@ -83,17 +83,6 @@ class MealviewState extends State<Mealview>{
           //ShowSlides(meal: Meal),
         );
       }
-//    if(Meal == null){
-//      return _buildWaitingScreen();
-//    }else{
-//      return new Scaffold(
-//        appBar: new AppBar(
-//          title: new Text('Meal'),
-//        ),
-//        body: ShowSlides(meal: Meal),
-//      );
-//    }
-//
 }
 
 
