@@ -140,7 +140,6 @@ class ShowSlidesState extends State<ShowSlides> {
       Dinner = meal.substring(check[2]+4);
     }
 
-
     slides.add (
       new Slide (
         title: "Morning",
