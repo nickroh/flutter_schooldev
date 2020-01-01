@@ -14,7 +14,7 @@ var db = firebase.firestore();
 const School = require('node-school-kr') 
 const school = new School()
 
-school.init(School.Type.HIGH, School.Region.KANGWON, 'K100000414')
+school.init(School.Type.HIGH, School.Region.GYEONGGI, 'J100000707')
 var meal
 
 const sampleAsync = async function() {
@@ -22,7 +22,7 @@ meal = await school.getMeal()
 
 
    // 년도와 달을 지정하여 해당 날짜의 데이터를 조회할 수 있습니다.
-  const mealCustom = await school.getMeal(2019, 12)
+  const mealCustom = await school.getMeal(2019, 1)
 
 
 // for(var objVarName in mealCustom) {
