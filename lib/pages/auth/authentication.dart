@@ -51,4 +51,8 @@ class Auth implements BaseAuth {
     return user.isEmailVerified;
   }
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    return _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
 }

@@ -12,7 +12,7 @@ class LoginSignUpPage extends StatefulWidget {
   State<StatefulWidget> createState() => new _LoginSignUpPageState();
 }
 
-enum FormMode { LOGIN, SIGNUP }
+enum FormMode { LOGIN, SIGNUP, RESET } // password reset func to be made
 
 class _LoginSignUpPageState extends State<LoginSignUpPage> {
   final _formKey = new GlobalKey<FormState>();
