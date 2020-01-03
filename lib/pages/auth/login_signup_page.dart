@@ -27,6 +27,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   bool _isIos;
   bool _isLoading;
 
+
   // Check if form is valid before perform login or signup
   bool _validateAndSave() {
     final form = _formKey.currentState;
@@ -49,12 +50,19 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         if (_formMode == FormMode.LOGIN) {
           userId = await widget.auth.signIn(_email, _password);
           print('Signed in: $userId');
-        } else {
+        }
+        if (_formMode == FormMode.SIGNUP){
           userId = await widget.auth.signUp(_email, _password);
           widget.auth.sendEmailVerification();
           _showVerifyEmailSentDialog();
           print('Signed up user: $userId');
           print('test');
+        }
+        if (_formMode == FormMode.RESET){
+          await widget.auth.sendPasswordResetEmail(_email);
+          setState(() {
+            _formMode = FormMode.LOGIN;
+          });
         }
         setState(() {
           _isLoading = false;
@@ -98,6 +106,14 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     _errorMessage = "";
     setState(() {
       _formMode = FormMode.LOGIN;
+    });
+  }
+
+  void _changeFormToReset(){
+    _formKey.currentState.reset();
+    _errorMessage = "";
+    setState(() {
+      _formMode = FormMode.RESET;
     });
   }
 
@@ -146,23 +162,43 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   }
 
   Widget _showBody(){
-    return new Container(
-        padding: EdgeInsets.all(16.0),
-        child: new Form(
-          key: _formKey,
-          child: new ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              _showLogo(),
-              _showEmailInput(),
-              _showPasswordInput(),
-              _showPrimaryButton(),
-              _showSecondaryButton(),
-              _showPasswordResetButton(),
-              _showErrorMessage(),
-            ],
-          ),
-        ));
+    if(_formMode == FormMode.RESET){
+      return new Container(
+          padding: EdgeInsets.all(16.0),
+          child: new Form(
+            key: _formKey,
+            child: new ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                _showLogo(),
+                _showEmailInput(),
+                _showPrimaryButton(),
+                _showSecondaryButton(),
+                _showPasswordResetButton(),
+                _showErrorMessage(),
+              ],
+            ),
+          ));
+    }else{
+      return new Container(
+          padding: EdgeInsets.all(16.0),
+          child: new Form(
+            key: _formKey,
+            child: new ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                _showLogo(),
+                _showEmailInput(),
+                _showPasswordInput(),
+                _showPrimaryButton(),
+                _showSecondaryButton(),
+                _showPasswordResetButton(),
+                _showErrorMessage(),
+              ],
+            ),
+          ));
+    }
+
   }
 
   Widget _showErrorMessage() {
@@ -234,36 +270,65 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     );
   }
   Widget _showPasswordResetButton(){
-    return new FlatButton(
-      child: _formMode == FormMode.LOGIN
-          ? new Text('Forgot password?',
-          style: new TextStyle(fontSize: 16.0, fontWeight: FontWeight.w300))
-          : new Text('',
-          style:
-          new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-      onPressed: _formMode == FormMode.LOGIN
-          ? _changeFormToSignUp
-          : _changeFormToLogin,
-
-    );
+    if(_formMode == FormMode.LOGIN){
+      return new FlatButton(
+        child: new Text('Forgot password?',
+            style: new TextStyle(fontSize: 16.0, fontWeight: FontWeight.w300)),
+        onPressed:
+        _changeFormToReset,
+      );
+    }else{
+      return SizedBox();
+    }
   }
 
   Widget _showSecondaryButton() {
-    return new FlatButton(
-      child: _formMode == FormMode.LOGIN
-          ? new Text('Create an account',
-          style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300))
-          : new Text('Have an account? Sign in',
-          style:
-          new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-      onPressed: _formMode == FormMode.LOGIN
-          ? _changeFormToSignUp
-          : _changeFormToLogin,
-    );
+    if(_formMode == FormMode.LOGIN){
+      return new FlatButton(
+        child: new Text('Create an account',
+            style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+        onPressed:
+          _changeFormToSignUp,
+      );
+    }
+    if(_formMode == FormMode.SIGNUP){
+      return new FlatButton(
+        child: new Text('Have an account? Sign in',
+            style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+        onPressed:
+        _changeFormToLogin,
+      );
+    }
+    if(_formMode == FormMode.RESET){
+      return new FlatButton(
+        child: new Text('Have an account? Sign in',
+            style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+        onPressed:
+        _changeFormToLogin,
+      );
+    }
   }
 
   Widget _showPrimaryButton() {
-    return new Padding(
+    if(_formMode == FormMode.SIGNUP || _formMode == FormMode.LOGIN){
+      return new Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+          child: SizedBox(
+            height: 40.0,
+            child: new RaisedButton(
+              elevation: 5.0,
+              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+              color: Colors.green,
+              child: _formMode == FormMode.LOGIN
+                  ? new Text('Login',
+                  style: new TextStyle(fontSize: 20.0, color: Colors.white))
+                  : new Text('Create account',
+                  style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+              onPressed: _validateAndSubmit,
+            ),
+          ));
+    }else{
+      return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
         child: SizedBox(
           height: 40.0,
@@ -271,13 +336,14 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
             elevation: 5.0,
             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.green,
-            child: _formMode == FormMode.LOGIN
-                ? new Text('Login',
-                style: new TextStyle(fontSize: 20.0, color: Colors.white))
-                : new Text('Create account',
-                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            child:
+              new Text('Submit',
+              style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: _validateAndSubmit,
-          ),
-        ));
+          )
+        ),
+      );
+    }
+
   }
 }
