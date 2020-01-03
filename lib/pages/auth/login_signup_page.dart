@@ -21,6 +21,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   String _password;
   String _errorMessage;
 
+
   // Initial form is login form
   FormMode _formMode = FormMode.LOGIN;
   bool _isIos;
@@ -157,6 +158,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
               _showPasswordInput(),
               _showPrimaryButton(),
               _showSecondaryButton(),
+              _showPasswordResetButton(),
               _showErrorMessage(),
             ],
           ),
@@ -229,6 +231,20 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
         onSaved: (value) => _password = value.trim(),
       ),
+    );
+  }
+  Widget _showPasswordResetButton(){
+    return new FlatButton(
+      child: _formMode == FormMode.LOGIN
+          ? new Text('Forgot password?',
+          style: new TextStyle(fontSize: 16.0, fontWeight: FontWeight.w300))
+          : new Text('',
+          style:
+          new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+      onPressed: _formMode == FormMode.LOGIN
+          ? _changeFormToSignUp
+          : _changeFormToLogin,
+
     );
   }
 
