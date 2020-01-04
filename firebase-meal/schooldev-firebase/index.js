@@ -4,9 +4,7 @@ require("firebase/firestore");
 
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
-    apiKey: "AIzaSyDdU5r-NF7dNCMvCFV6WUoVBd0e8BkBD_w",
-    authDomain: "flutter-schooldev.firebaseapp.com",
-    projectId: "flutter-schooldev"
+    // your firebase api key goes here
   });
   
 var db = firebase.firestore();
