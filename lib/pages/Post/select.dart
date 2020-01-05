@@ -1,4 +1,5 @@
-import 'package:dynamic_list_view/DynamicListView.dart';
+import 'package:flutter_schooldev/pages/Post/ui_helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -135,7 +136,7 @@ class _DatailPageState extends State<DetailPage>{
     );
 
     final lorem = Container(
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.fromLTRB(4,14,4,14),
       decoration: BoxDecoration(
           color: Color.fromRGBO(241, 241, 241, 0.8),
           borderRadius: new BorderRadius.only(
@@ -144,10 +145,52 @@ class _DatailPageState extends State<DetailPage>{
               bottomRight: const Radius.circular(10.0),
               bottomLeft:const Radius.circular(10.0)
           )),
+      child: Align(
+        alignment: Alignment.topLeft,
+//      padding: EdgeInsets.all(20.0),
       child: Text(
         widget.post.data['content'],
-        style: TextStyle(fontSize: 16.0, color: Colors.black),
-      ),
+        textAlign: TextAlign.left,
+        style: TextStyle(
+          fontSize: 17.0,
+          color: Colors.black,
+        ),
+      )),
+    );
+
+    //Future _data;
+
+    final comments = ListView.builder(
+        itemCount: widget.post.data['comments'].length,
+        itemBuilder: (_, index){
+
+          return ListTile(
+            title: Text(snapshot.data[index].data['title']),
+            onTap: () => navigateToDetail(snapshot.data[index]),
+          );
+        });
+    ),
+//    final comments = Container(
+//      padding: EdgeInsets.all(10.0),
+//      margin: EdgeInsets.symmetric(vertical: 10.0),
+//      decoration: BoxDecoration(
+//          borderRadius: BorderRadius.circular(10.0), color: Colors.green),
+//      child: Column(
+//        crossAxisAlignment: CrossAxisAlignment.start,
+//        children: <Widget>[
+//          Text(
+//            '노건호',
+//            style: TextStyle(fontWeight: FontWeight.bold),
+//          ),
+//          UIHelper.verticalSpaceSmall(),
+//          Text('Test'),
+//        ],
+//      ),
+//    );
+
+    final space = Container(
+      child:
+      UIHelper.verticalSpace(50.0)
     );
 
     return Scaffold(
@@ -158,14 +201,14 @@ class _DatailPageState extends State<DetailPage>{
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(30.0),
-            decoration: BoxDecoration(
+//            decoration: BoxDecoration(
 //              gradient: LinearGradient(colors: [
 //                Colors.white,
 //                Colors.lightGreenAccent,
 //              ]),
-            ),
+//            ),
             child: Column(
-              children: <Widget>[ welcome, lorem],
+              children: <Widget>[ welcome, lorem, space ,comments],
             ),
           )
       ),

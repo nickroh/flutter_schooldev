@@ -22,7 +22,7 @@ Android Studio를 실행하면 다음과 같은 창이 나타납니다. 여기�
 
 다음과 같이 Flutter 와 Dart를 검색해서 설치합니다
 
-
+ 
 
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FcrGJSE%2Fbtqyqx6JwfI%2FHMPwwnvSBKkGk0IV89S0PK%2Fimg.png)
 
