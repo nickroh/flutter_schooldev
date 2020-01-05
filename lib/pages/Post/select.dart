@@ -123,6 +123,16 @@ class DetailPage extends StatefulWidget{
 }
 
 class _DatailPageState extends State<DetailPage>{
+  final europeanCountries = ['Albania', 'Andorra', 'Armenia', 'Austria',
+    'Azerbaijan', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria',
+    'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland',
+    'France', 'Georgia', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland',
+    'Italy', 'Kazakhstan', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania',
+    'Luxembourg', 'Macedonia', 'Malta', 'Moldova', 'Monaco', 'Montenegro',
+    'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia',
+    'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden',
+    'Switzerland', 'Turkey', 'Ukraine', 'United Kingdom', 'Vatican City'];
+
   @override
   Widget build(BuildContext context){
 
@@ -161,15 +171,38 @@ class _DatailPageState extends State<DetailPage>{
     //Future _data;
 
     final comments = ListView.builder(
-        itemCount: widget.post.data['comments'].length,
-        itemBuilder: (_, index){
-
-          return ListTile(
-            title: Text(snapshot.data[index].data['title']),
-            onTap: () => navigateToDetail(snapshot.data[index]),
-          );
-        });
-    ),
+      itemCount: europeanCountries.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(europeanCountries[index]),
+        );
+      },
+    );
+//    Flexible(
+//      child:ListView.builder(
+//          itemCount: commentsdata.length,
+//          itemBuilder: (_, index){
+//
+//            return Container(
+//              padding: EdgeInsets.all(10.0),
+//              margin: EdgeInsets.symmetric(vertical: 10.0),
+//              decoration: BoxDecoration(
+//                  borderRadius: BorderRadius.circular(10.0), color: Colors.grey),
+//              child: Column(
+//                crossAxisAlignment: CrossAxisAlignment.start,
+//                children: <Widget>[
+//                  Text(
+//                    '노건호',
+//                    style: TextStyle(fontWeight: FontWeight.bold),
+//                  ),
+//                  UIHelper.verticalSpaceSmall(),
+//                  Text('Test'),
+//                ],
+//              ),
+//            );
+//          }) ,
+//    );
+   // ),
 //    final comments = Container(
 //      padding: EdgeInsets.all(10.0),
 //      margin: EdgeInsets.symmetric(vertical: 10.0),
@@ -208,7 +241,7 @@ class _DatailPageState extends State<DetailPage>{
 //              ]),
 //            ),
             child: Column(
-              children: <Widget>[ welcome, lorem, space ,comments],
+              children: <Widget>[ welcome, lorem, space ,/*comments*/],
             ),
           )
       ),
