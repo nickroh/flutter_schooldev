@@ -40,4 +40,4 @@ SchoolDev에 대한 설명
 노건호 
 
 ## Download
-<a href="https://drive.google.com/open?id=1WsY6nYBiYdNGtdkbf0lN2OKFoKGzw04Z"> 2020-01-03 업데이트 </>
+<a href="https://drive.google.com/open?id=1pvIsjNqCKxFoKmcIgiEdj_bIiLy2O_1S"> 2020-01-06 업데이트 </>
