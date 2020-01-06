@@ -90,10 +90,13 @@ class _ListPageState extends State<ListPage>{
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index){
 
-                  return ListTile(
-                    title: Text(snapshot.data[index].data['title']),
-                    onTap: () => navigateToDetail(snapshot.data[index]),
+                  return Card(
+                    child: ListTile(
+                      title: Text(snapshot.data[index].data['title']),
+                      onTap: () => navigateToDetail(snapshot.data[index]),
+                    ),
                   );
+
                 });
           }
         }),
@@ -123,19 +126,27 @@ class DetailPage extends StatefulWidget{
 }
 
 class _DatailPageState extends State<DetailPage>{
-  final europeanCountries = ['Albania', 'Andorra', 'Armenia', 'Austria',
-    'Azerbaijan', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria',
-    'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland',
-    'France', 'Georgia', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland',
-    'Italy', 'Kazakhstan', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania',
-    'Luxembourg', 'Macedonia', 'Malta', 'Moldova', 'Monaco', 'Montenegro',
-    'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia',
-    'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden',
-    'Switzerland', 'Turkey', 'Ukraine', 'United Kingdom', 'Vatican City'];
+  var comments_data;
+  void initState(){
+    comments_data = widget.post.data['comments'];
+    print(comments_data);
+    if(comments_data == null){
+      comments_data = [""];
+    }
+  }
+
 
   @override
   Widget build(BuildContext context){
-
+    Widget welcome_widget(){
+      return Container(
+        padding: EdgeInsets.all(15.0),
+        child: Text(
+          widget.post.data['title'],
+          style: TextStyle(fontSize: 28.0, color: Colors.black),
+        ),
+      );
+    }
     final welcome = Container(
       padding: EdgeInsets.all(15.0),
       
@@ -144,7 +155,30 @@ class _DatailPageState extends State<DetailPage>{
         style: TextStyle(fontSize: 28.0, color: Colors.black),
       ),
     );
-
+    Widget lorem_widget(){
+      return Container(
+        padding: EdgeInsets.fromLTRB(4,14,4,14),
+        decoration: BoxDecoration(
+            color: Color.fromRGBO(241, 241, 241, 0.8),
+            borderRadius: new BorderRadius.only(
+                topLeft: const Radius.circular(10.0),
+                topRight: const Radius.circular(10.0),
+                bottomRight: const Radius.circular(10.0),
+                bottomLeft:const Radius.circular(10.0)
+            )),
+        child: Align(
+            alignment: Alignment.topLeft,
+//      padding: EdgeInsets.all(20.0),
+            child: Text(
+              widget.post.data['content'],
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 17.0,
+                color: Colors.black,
+              ),
+            )),
+      );
+    }
     final lorem = Container(
       padding: EdgeInsets.fromLTRB(4,14,4,14),
       decoration: BoxDecoration(
@@ -169,15 +203,34 @@ class _DatailPageState extends State<DetailPage>{
     );
 
     //Future _data;
+    Widget comments_widget(){
+      return Container(
 
-    final comments = ListView.builder(
-      itemCount: europeanCountries.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(europeanCountries[index]),
-        );
-      },
+          height: 1000,
+          child: ListView.builder(
+            itemCount: comments_data.length,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(comments_data[index]),
+              );
+            },
+          )
+      );
+    }
+    final comments = Container(
+        height: 1000,
+        child: ListView.builder(
+          itemCount: comments_data.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(comments_data[index]),
+            );
+          },
+        )
     );
+
+
 //    Flexible(
 //      child:ListView.builder(
 //          itemCount: commentsdata.length,
@@ -232,6 +285,7 @@ class _DatailPageState extends State<DetailPage>{
       ),
       body: SingleChildScrollView(
           child: Container(
+//            height: ,
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(30.0),
 //            decoration: BoxDecoration(
@@ -241,7 +295,7 @@ class _DatailPageState extends State<DetailPage>{
 //              ]),
 //            ),
             child: Column(
-              children: <Widget>[ welcome, lorem, space ,/*comments*/],
+              children: <Widget>[ welcome_widget(), lorem_widget(), space ,comments_widget()],
             ),
           )
       ),
