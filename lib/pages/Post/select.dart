@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter_schooldev/pages/Post/ui_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -127,6 +128,9 @@ class DetailPage extends StatefulWidget{
 
 class _DatailPageState extends State<DetailPage>{
   var comments_data;
+  bool comment_state = false;
+  String message = 'comment';
+
   void initState(){
     comments_data = widget.post.data['comments'];
     print(comments_data);
@@ -201,6 +205,30 @@ class _DatailPageState extends State<DetailPage>{
         ),
       )),
     );
+
+    Widget write_comments(){
+      if(comment_state == false){
+        return Container(
+            child:
+            UIHelper.verticalSpace(50.0)
+        );
+      }else{
+        return  Container(
+
+          child: TextFormField(
+
+            decoration: InputDecoration(
+                hintText: 'comments',
+                filled: false,
+                suffixIcon: IconButton(
+                    icon: Icon(Icons.check),
+                    onPressed: () {
+                      debugPrint('222');
+                    })),
+          ),
+        );
+      }
+    }
 
     //Future _data;
     Widget comments_widget(){
@@ -295,15 +323,23 @@ class _DatailPageState extends State<DetailPage>{
 //              ]),
 //            ),
             child: Column(
-              children: <Widget>[ welcome_widget(), lorem_widget(), space ,comments_widget()],
+              children: <Widget>[ welcome_widget(), lorem_widget(), write_comments() ,comments_widget()],
             ),
           )
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Add your onPressed code here!
+          setState(() {
+            if(comment_state == false){
+              comment_state = true;
+            }else{
+              comment_state = false;
+            }
+          });
+
         },
-        label: Text('comment'),
+        label: Text(message),
         icon: Icon(Icons.comment),
         backgroundColor: Colors.lightGreen,
       ),
