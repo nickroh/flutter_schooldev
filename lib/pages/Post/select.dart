@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter_schooldev/pages/Post/ui_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,8 +63,8 @@ class _ListPageState extends State<ListPage>{
     return qn.documents;
   }
   
-  navigateToDetail(DocumentSnapshot post){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(post: post,)));
+  navigateToDetail(DocumentSnapshot post, String pagetitle, String docid){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(post: post, pagetitle: pagetitle, docid: docid)));
   }
 
   @override
@@ -94,7 +93,10 @@ class _ListPageState extends State<ListPage>{
                   return Card(
                     child: ListTile(
                       title: Text(snapshot.data[index].data['title']),
-                      onTap: () => navigateToDetail(snapshot.data[index]),
+                      onTap: () {
+                        navigateToDetail(snapshot.data[index], widget.pagetitle, snapshot.data[index].documentID);
+
+                      }
                     ),
                   );
 
@@ -119,17 +121,27 @@ class _ListPageState extends State<ListPage>{
 class DetailPage extends StatefulWidget{
 
   final DocumentSnapshot post;
+  final String pagetitle;
+  final String docid;
 
-  DetailPage({this.post});
+  DetailPage({this.post, this.pagetitle, this.docid});
 
   @override
   _DatailPageState createState() => _DatailPageState();
 }
 
 class _DatailPageState extends State<DetailPage>{
-  var comments_data;
+  var comments_data = new List();
   bool comment_state = false;
   String message = 'comment';
+
+  String commenttmp = "";
+
+
+
+  final _formKey = GlobalKey<FormState>();
+  final databaseReference = Firestore.instance;
+
 
   void initState(){
     comments_data = widget.post.data['comments'];
@@ -151,14 +163,7 @@ class _DatailPageState extends State<DetailPage>{
         ),
       );
     }
-    final welcome = Container(
-      padding: EdgeInsets.all(15.0),
-      
-      child: Text(
-        widget.post.data['title'],
-        style: TextStyle(fontSize: 28.0, color: Colors.black),
-      ),
-    );
+
     Widget lorem_widget(){
       return Container(
         padding: EdgeInsets.fromLTRB(4,14,4,14),
@@ -183,28 +188,7 @@ class _DatailPageState extends State<DetailPage>{
             )),
       );
     }
-    final lorem = Container(
-      padding: EdgeInsets.fromLTRB(4,14,4,14),
-      decoration: BoxDecoration(
-          color: Color.fromRGBO(241, 241, 241, 0.8),
-          borderRadius: new BorderRadius.only(
-              topLeft: const Radius.circular(10.0),
-              topRight: const Radius.circular(10.0),
-              bottomRight: const Radius.circular(10.0),
-              bottomLeft:const Radius.circular(10.0)
-          )),
-      child: Align(
-        alignment: Alignment.topLeft,
-//      padding: EdgeInsets.all(20.0),
-      child: Text(
-        widget.post.data['content'],
-        textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 17.0,
-          color: Colors.black,
-        ),
-      )),
-    );
+
 
     Widget write_comments(){
       if(comment_state == false){
@@ -214,26 +198,40 @@ class _DatailPageState extends State<DetailPage>{
         );
       }else{
         return  Container(
+          child: Form(
+            key: _formKey,
+            child: TextFormField(
 
-          child: TextFormField(
-
-            decoration: InputDecoration(
-                hintText: 'comments',
-                filled: false,
-                suffixIcon: IconButton(
-                    icon: Icon(Icons.check),
-                    onPressed: () {
-                      debugPrint('222');
-                    })),
-          ),
+              decoration: InputDecoration(
+                  hintText: 'comments',
+                  filled: false,
+                  suffixIcon: IconButton(
+                      icon: Icon(Icons.check),
+                      onPressed: () {
+                        _onSave();
+                        debugPrint('222');
+                        setState(() {
+                          comment_state = false;
+                        });
+                      })),
+              validator: (value) {
+                commenttmp = value;
+                if (value.isEmpty) {
+                  return '내용을 입력해주세요.';
+                }
+              },
+              onSaved: (val) =>
+                  setState(() {
+//              widget.review.title = val;
+                  }),
+            ),
+          )
         );
       }
     }
 
-    //Future _data;
     Widget comments_widget(){
       return Container(
-
           height: 1000,
           child: ListView.builder(
             itemCount: comments_data.length,
@@ -246,66 +244,7 @@ class _DatailPageState extends State<DetailPage>{
           )
       );
     }
-    final comments = Container(
-        height: 1000,
-        child: ListView.builder(
-          itemCount: comments_data.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(comments_data[index]),
-            );
-          },
-        )
-    );
 
-
-//    Flexible(
-//      child:ListView.builder(
-//          itemCount: commentsdata.length,
-//          itemBuilder: (_, index){
-//
-//            return Container(
-//              padding: EdgeInsets.all(10.0),
-//              margin: EdgeInsets.symmetric(vertical: 10.0),
-//              decoration: BoxDecoration(
-//                  borderRadius: BorderRadius.circular(10.0), color: Colors.grey),
-//              child: Column(
-//                crossAxisAlignment: CrossAxisAlignment.start,
-//                children: <Widget>[
-//                  Text(
-//                    '노건호',
-//                    style: TextStyle(fontWeight: FontWeight.bold),
-//                  ),
-//                  UIHelper.verticalSpaceSmall(),
-//                  Text('Test'),
-//                ],
-//              ),
-//            );
-//          }) ,
-//    );
-   // ),
-//    final comments = Container(
-//      padding: EdgeInsets.all(10.0),
-//      margin: EdgeInsets.symmetric(vertical: 10.0),
-//      decoration: BoxDecoration(
-//          borderRadius: BorderRadius.circular(10.0), color: Colors.green),
-//      child: Column(
-//        crossAxisAlignment: CrossAxisAlignment.start,
-//        children: <Widget>[
-//          Text(
-//            '노건호',
-//            style: TextStyle(fontWeight: FontWeight.bold),
-//          ),
-//          UIHelper.verticalSpaceSmall(),
-//          Text('Test'),
-//        ],
-//      ),
-//    );
-
-    final space = Container(
-      child:
-      UIHelper.verticalSpace(50.0)
-    );
 
     return Scaffold(
       appBar: AppBar(
@@ -344,6 +283,47 @@ class _DatailPageState extends State<DetailPage>{
         backgroundColor: Colors.lightGreen,
       ),
     );
+  }
+
+  refresh() async{
+    DocumentReference getcomment = Firestore.instance.collection(widget.pagetitle).document(widget.docid);
+    DocumentSnapshot doc = await getcomment.get();
+    setState(() {
+      print(comments_data);
+      comments_data = doc.data['comments'];
+      print(comments_data);
+    });
+
+    print(comments_data);
+  }
+
+  _onSave() async{
+    final form = _formKey.currentState;
+
+    if (!form.validate()) {
+      return;
+    }
+
+    DocumentReference getcomment = Firestore.instance.collection(widget.pagetitle).document(widget.docid);
+    DocumentSnapshot doc = await getcomment.get();
+    List<String> cmt =  [commenttmp];
+    print(widget.docid);
+    print(widget.pagetitle);
+    getcomment.updateData(
+        {
+          'comments' : FieldValue.arrayUnion(cmt)
+        }
+    );
+    setState(() {
+      refresh();
+      comments_data;
+    });
+
+
+
+
+//    getcomment.updateData(<String, dynamic>{'comments': FieldValue.arrayUnion([commenttmp])});
+//      await databaseReference.collection(widget.pagetitle).document(widget.post.data['title']).updateData(FieldValue.arrayUnion({'comments':commenttmp}));
   }
 
 }
