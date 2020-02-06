@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_schooldev/pages/auth/authentication.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
 import 'package:flutter_schooldev/pages/Home/slideshow.dart';
-import 'package:flutter_schooldev/pages/Home/buttoneffect/animated_child.dart';
-import 'package:flutter_schooldev/pages/Home/buttoneffect/animated_floating_button.dart';
-import 'package:flutter_schooldev/pages/Home/buttoneffect/background_overlay.dart';
+import 'package:flutter_schooldev/pages/rule/guideline.dart';
 import 'package:flutter_schooldev/pages/Home/buttoneffect/speed_dial.dart';
 import 'package:flutter_schooldev/pages/Home/buttoneffect/speed_dial_child.dart';
 import 'package:flutter_schooldev/pages/meal/mealview.dart';
@@ -173,6 +169,10 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Colors.yellow,
               label: '커뮤니티 규정',
               labelStyle: TextStyle(fontSize: 18.0),
+              onTap: () => {
+                print('SECOND CHILD'),
+                Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => GuideLine()))
+              }
             ),
           SpeedDialChild(
               child: Icon(Icons.restaurant_menu),
