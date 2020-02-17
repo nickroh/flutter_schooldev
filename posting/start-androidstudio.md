@@ -20,7 +20,7 @@ description: Install AndroidStudio
 
 
 
-다운로드후 받은 설치  파일을 실행하면  
+다운로드후 받은 설치 파일을 실행하면  
 
 다음과 같은 창이 보입니다
 
@@ -28,11 +28,4 @@ description: Install AndroidStudio
 
 
 
-
-
 잘 모르시겠다면 엔터를 계속 누르세요
-
-이거는 테스트 입니다
-
-테스트
-
