@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/share-0.6.3+4" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.0.14" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.1.8" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.0+9" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/intro_slider-1.2.3" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.14.0+9" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-5.2.1" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.12.11" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-3.0.10" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_appavailability-0.0.21" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launch-0.2.0" />
+      <root url="file://$USER_HOME$/Desktop/Codying/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/dynamic_list_view-0.1.9" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
