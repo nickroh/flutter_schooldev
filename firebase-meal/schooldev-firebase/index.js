@@ -2,12 +2,18 @@ const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
 
-// Initialize Cloud Firestore through Firebase
+//Initialize Cloud Firestore through Firebase
 firebase.initializeApp({
     apiKey: "AIzaSyDdU5r-NF7dNCMvCFV6WUoVBd0e8BkBD_w",
     authDomain: "flutter-schooldev.firebaseapp.com",
     projectId: "flutter-schooldev"
   });
+
+// firebase.initializeApp({
+//     apiKey: "AIzaSyAnovu3lcdiNmMMzS7xi1WM2LssMPFKSMk",
+//     authDomain: "minjok-herald.firebaseapp.com",
+//     projectId: "minjok-herald"
+//   });
   
 var db = firebase.firestore();
 
@@ -22,7 +28,7 @@ meal = await school.getMeal()
 
 
    // 년도와 달을 지정하여 해당 날짜의 데이터를 조회할 수 있습니다.
-  const mealCustom = await school.getMeal(2019, 12)
+  const mealCustom = await school.getMeal(2020, 7)
 
 
 // for(var objVarName in mealCustom) {
