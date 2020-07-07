@@ -45,6 +45,16 @@ meal = await school.getMeal()
 // }
 for(var objVarName in mealCustom){
     console.log(mealCustom[objVarName])
+    console.log(mealCustom[objVarName]=="")
+    if(mealCustom[objVarName] == ""){
+      mealCustom[objVarName] = "[  ]No Data [  ][  ]"
+    }else if(!mealCustom[objVarName].includes('중식')){
+      mealCustom[objVarName] = mealCustom[objVarName] + "[중식] no data [석식] no data";
+    }else if(!mealCustom[objVarName].includes('석식')){
+      mealCustom[objVarName] = mealCustom[objVarName] + "[석식] no data";
+    }
+    
+    // console.log(mealCustom[objVarName] + "date" +objVarName)
     data = {
         date : "day" + objVarName,
         meal : mealCustom[objVarName]
