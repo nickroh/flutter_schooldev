@@ -12,7 +12,7 @@ firebase.initializeApp({
 // firebase.initializeApp({
 //     apiKey: "AIzaSyAnovu3lcdiNmMMzS7xi1WM2LssMPFKSMk",
 //     authDomain: "minjok-herald.firebaseapp.com",
-//     projectId: "minjok-herald"
+//     projectId: "minjok-herald" 
 //   });
   
 var db = firebase.firestore();
@@ -28,7 +28,7 @@ meal = await school.getMeal()
 
 
    // 년도와 달을 지정하여 해당 날짜의 데이터를 조회할 수 있습니다.
-  const mealCustom = await school.getMeal(2020, 8)
+  const mealCustom = await school.getMeal(2020, 11)
 
 
 // for(var objVarName in mealCustom) {
