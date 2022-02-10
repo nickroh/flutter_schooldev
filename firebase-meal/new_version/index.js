@@ -70,9 +70,9 @@ const example = async function () {
     console.log(meal[objVarName]=="")
     if(meal[objVarName] == ""){
       meal[objVarName] = "[  ]No Data [  ][  ]"
-    }else if(!meal[objVarName].includes('중식')){
+    }else if(!meal[objVarName].toString().includes('중식')){
       meal[objVarName] = meal[objVarName] + "[중식] no data [석식] no data";
-    }else if(!meal[objVarName].includes('석식')){
+    }else if(!meal[objVarName].toString().includes('석식')){
       meal[objVarName] = meal[objVarName] + "[석식] no data";
     }
     
